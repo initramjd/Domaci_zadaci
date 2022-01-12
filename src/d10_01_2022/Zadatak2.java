@@ -30,13 +30,13 @@ public class Zadatak2 {
 		gree.printAC();
 		
 		
-		System.out.println(samsung.marka + " po satu trosi " + samsung.potrosnjaPoSatu() + " kw");
-		System.out.println(galanz.marka + " po satu trosi " + galanz.potrosnjaPoSatu() + " kw");
-		System.out.println(gree.marka + " po satu trosi " + gree.potrosnjaPoSatu() + " kw");
+		System.out.println(samsung.marka + " za mesec dana potrosi " + samsung.mesecnaPotrosnja() + " kw");
+		System.out.println(galanz.marka + " za mesec dana potrosi " + galanz.mesecnaPotrosnja() + " kw");
+		System.out.println(gree.marka + " za mesec dana potrosi " + gree.mesecnaPotrosnja() + " kw");
 
-		System.out.println(samsung.marka + " je za mesec dana napravio racun od: " + samsung.racun() + " dinara");
-		System.out.println(galanz.marka + " je za mesec dana napravio racun od: " + galanz.racun() + " dinara");
-		System.out.println(gree.marka + " je za mesec dana napravio racun od: " + gree.racun() + " dinara");
+		System.out.println(samsung.marka + " za mesec dana napravi racun od: " + samsung.racun() + " dinara");
+		System.out.println(galanz.marka + " za mesec dana napravi racun od: " + galanz.racun() + " dinara");
+		System.out.println(gree.marka + " za mesec dana napravi racun od: " + gree.racun() + " dinara");
 	}
 
 }
