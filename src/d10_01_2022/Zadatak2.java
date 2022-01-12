@@ -8,21 +8,35 @@ public class Zadatak2 {
 		samsung.marka = "Samsung";
 		samsung.temp = 27;
 		samsung.mod = "GREJE";
+		samsung.potrosnjaDokHladi = 1.2;
+		samsung.potrosnjaDokGreje = 2.5;
 
 		SmartAirConditioning galanz = new SmartAirConditioning();
 		galanz.marka = "Galanz";
 		galanz.temp = 17;
 		galanz.mod = "HLADI";
+		galanz.potrosnjaDokHladi = 1.6;
+		galanz.potrosnjaDokGreje = 2.8;
 
 		SmartAirConditioning gree = new SmartAirConditioning();
 		gree.marka = "Gree";
 		gree.temp = 23;
-		gree.mod = "HLADI";
+		gree.mod = "GREJE";
+		gree.potrosnjaDokHladi = 1.1;
+		gree.potrosnjaDokGreje = 2.1;
 
 		samsung.printAC();
 		galanz.printAC();
 		gree.printAC();
+		
+		
+		System.out.println(samsung.marka + " po satu trosi " + samsung.potrosnjaPoSatu() + " kw");
+		System.out.println(galanz.marka + " po satu trosi " + galanz.potrosnjaPoSatu() + " kw");
+		System.out.println(gree.marka + " po satu trosi " + gree.potrosnjaPoSatu() + " kw");
 
+		System.out.println(samsung.marka + " je za mesec dana napravio racun od: " + samsung.racun() + " dinara");
+		System.out.println(galanz.marka + " je za mesec dana napravio racun od: " + galanz.racun() + " dinara");
+		System.out.println(gree.marka + " je za mesec dana napravio racun od: " + gree.racun() + " dinara");
 	}
 
 }
