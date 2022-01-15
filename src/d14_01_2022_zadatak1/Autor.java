@@ -8,8 +8,8 @@ public class Autor {
 	 * formatu: (ime autora) (prezime autora)
 	 */
 
-	String ime;
-	String prezime;
+	private String ime;
+	private String prezime;
 
 	Autor() {
 
