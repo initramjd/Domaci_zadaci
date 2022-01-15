@@ -64,8 +64,9 @@ public class Knjiga {
 		 * (naziv) - (godina izdanja) autor: (ime autora) (prezime autora)
 		 */
 
-		System.out.println(this.isbn + "\n" + this.naziv + " - " + this.godinaIzdanja + "\n" + "Autor: "
-				+ this.autor.getIme() + " " + this.autor.getPrezime() + "\n");
+		System.out.print(this.isbn + "\n" + this.naziv + " - " + this.godinaIzdanja + "\n" + "Autor: ");
+		this.autor.printAutor();
+		System.out.println();
 
 	}
 
