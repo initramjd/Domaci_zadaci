@@ -68,8 +68,9 @@ public class Vaga {
 			cenaPoMeri = this.proizvod.getCenaLb();
 		}
 
-		System.out.println(this.proizvod.getSifra() + " - " + this.proizvod.getNaziv() + "\n" + cenaPoMeri + " " + " x "
-				+ tezina + this.mernaJedinica + "\n" + "Ukupno: " + sracunajCenu(tezina) + "\n");
+		this.proizvod.printProizvod();
+		System.out.println(
+				cenaPoMeri + " x " + tezina + this.mernaJedinica + "\n" + "Ukupno: " + sracunajCenu(tezina) + "\n");
 	}
 
 }

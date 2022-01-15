@@ -57,7 +57,7 @@ public class Proizvod {
 	}
 	
 	public void printProizvod() {
-		System.out.println(this.sifra + " " + this.naziv);
+		System.out.println(this.sifra + " - " + this.naziv);
 	}
 
 }
