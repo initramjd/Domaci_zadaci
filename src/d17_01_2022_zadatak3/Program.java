@@ -37,16 +37,15 @@ public class Program {
 		double grejacDD = s.nextDouble();
 
 		System.out.println();
-
-		Ringla ringlaDL = new Ringla(rDL, grejacDL);
-		Ringla ringlaDD = new Ringla(rDL, grejacDL);
+		
 		Ringla ringlaGL = new Ringla(rGL, grejacGL);
 		Ringla ringlaGD = new Ringla(rGD, grejacGD);
+		Ringla ringlaDL = new Ringla(rDL, grejacDL);
+		Ringla ringlaDD = new Ringla(rDD, grejacDD);
+		
+		ElektricniSporet koncar = new ElektricniSporet(marka, garancija, maxUkljucenihRingli, ringlaGL, ringlaGD, ringlaDL, ringlaDD);
 
-		ElektricniSporet koncar = new ElektricniSporet(marka, garancija, maxUkljucenihRingli, ringlaDL, ringlaDD,
-				ringlaGL, ringlaGD);
-
-		koncar.pojacaj(1, koncar);
+		koncar.pojacaj(1);
 		koncar.pojacaj(1);
 		koncar.pojacaj(1);
 		koncar.pojacaj(1);

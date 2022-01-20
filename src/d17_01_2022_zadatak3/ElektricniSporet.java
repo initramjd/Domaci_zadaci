@@ -74,7 +74,7 @@ public class ElektricniSporet {
 		return ringle.get(3);
 	}
 
-	public void pojacaj(int pozicija, ArrayList<Ringla> ringle) {
+	public void pojacaj(int pozicija) {
 		/*
 		 * metodu pojacaj kojoj se prosledjuje pozicija ringle pozicija 1 je ringla gore
 		 * levo pozicija 2 je ringla gore desno pozicija 3 je ringla dole levo pozicija
@@ -83,12 +83,12 @@ public class ElektricniSporet {
 		 * funkije
 		 * 
 		 */
-		Ringla ringla = ringle.get(pozicija);
+		Ringla ringla = ringle.get(pozicija - 1);
 
 		if (ringla.daLiRadiRingla()) {
 			ringla.pojacajRinglu();
-		} else if (brojUkljucenihRingli(ringle) + 1 > this.maxUkljucenihRingli) {
-			ugasiRingle(ringle, pozicija);
+		} else if (brojUkljucenihRingli() + 1 > this.maxUkljucenihRingli) {
+			ugasiRingle(pozicija);
 			ringla.pojacajRinglu();
 		} else {
 			ringla.pojacajRinglu();
@@ -109,7 +109,7 @@ public class ElektricniSporet {
 
 	}
 
-	public int brojUkljucenihRingli(ArrayList<Ringla> ringle) {
+	public int brojUkljucenihRingli() {
 		int brojac = 0;
 
 		for (int i = 0; i < ringle.size(); i++) {
@@ -117,24 +117,24 @@ public class ElektricniSporet {
 
 			if (ringla.daLiRadiRingla()) {
 				brojac++;
-			}			
+			}
 		}
 		return brojac;
 	}
 
-	public double potrosnja(ArrayList<Ringla> ringle, double vreme) {
+	public double potrosnja(double vreme) {
 		/*
 		 * metodu koja racuna i vraca ukupnu potrosnju za ceo elektricni sporet, tako
 		 * sto sabira potrosnju za sve ringle (kao parametar se unosi vreme koliko vec
 		 * ringle rade)
-		 */		
+		 */
 		double potrosnja = 0;
 		for (int i = 0; i < ringle.size(); i++) {
 			Ringla ringla = this.ringle.get(i);
-			potrosnja = potrosnja + ringla.potrosnjaElektricneEnergije(vreme);	
-		}		
-		return potrosnja;
+			potrosnja = potrosnja + ringla.potrosnjaElektricneEnergije(vreme);
 		}
+		return potrosnja;
+	}
 
 	public void printSporet() {
 		/*
@@ -147,8 +147,9 @@ public class ElektricniSporet {
 		 * ringle Jacina: jacina Grejac: jacina grejaca kW
 		 * 
 		 */
-		
-		System.out.println(this.marka + " - " + this.garancija + "\n" + "Ringle: " + "\n" + "Ringla GL:");
+
+		System.out.println(this.marka + " - " + this.garancija + "\n" + "Ringle: " + "\n");
+		System.out.print("Ringla GL: ");
 		this.ringle.get(0).printRingla();
 		System.out.println("Ringla GD: ");
 		this.ringle.get(1).printRingla();
@@ -159,9 +160,9 @@ public class ElektricniSporet {
 		System.out.println();
 	}
 
-	public void ugasiRingle(ArrayList<Ringla> ringle, int ringla) {
-		for (int i = 0; i < ringle.size(); i++) {
-			if (i != ringla) {
+	public void ugasiRingle(int pozicija) {
+		for (int i = 1; i <= ringle.size(); i++) {
+			if (i != pozicija) {
 				this.ugasi(i);
 			}
 		}
