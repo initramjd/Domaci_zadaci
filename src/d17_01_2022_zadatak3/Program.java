@@ -46,7 +46,7 @@ public class Program {
 		ElektricniSporet koncar = new ElektricniSporet(marka, garancija, maxUkljucenihRingli, ringlaDL, ringlaDD,
 				ringlaGL, ringlaGD);
 
-		koncar.pojacaj(1);
+		koncar.pojacaj(1, koncar);
 		koncar.pojacaj(1);
 		koncar.pojacaj(1);
 		koncar.pojacaj(1);

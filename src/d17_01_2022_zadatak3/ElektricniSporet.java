@@ -1,5 +1,7 @@
 package d17_01_2022_zadatak3;
 
+import java.util.ArrayList;
+
 public class ElektricniSporet {
 
 	/*
@@ -30,20 +32,18 @@ public class ElektricniSporet {
 	String marka;
 	int garancija;
 	int maxUkljucenihRingli;
-	Ringla ringlaGL;
-	Ringla ringlaGD;
-	Ringla ringlaDL;
-	Ringla ringlaDD;
+
+	ArrayList<Ringla> ringle = new ArrayList<Ringla>();
 
 	ElektricniSporet(String marka, int garancija, int maxUkljucenihRingli, Ringla ringlaGL, Ringla ringlaGD,
 			Ringla ringlaDL, Ringla ringlaDD) {
 		this.marka = marka;
 		this.garancija = garancija;
 		this.maxUkljucenihRingli = maxUkljucenihRingli;
-		this.ringlaGL = ringlaGL;
-		this.ringlaGD = ringlaGD;
-		this.ringlaDL = ringlaDL;
-		this.ringlaDD = ringlaDD;
+		ringle.add(ringlaGL);
+		ringle.add(ringlaGD);
+		ringle.add(ringlaDL);
+		ringle.add(ringlaDD);
 	}
 
 	public String getMarka() {
@@ -59,22 +59,22 @@ public class ElektricniSporet {
 	}
 
 	public Ringla getRinglaGL() {
-		return ringlaGL;
+		return ringle.get(0);
 	}
 
 	public Ringla getRinglaGD() {
-		return ringlaGD;
+		return ringle.get(1);
 	}
 
 	public Ringla getRinglaDL() {
-		return ringlaDL;
+		return ringle.get(2);
 	}
 
 	public Ringla getRinglaDD() {
-		return ringlaDD;
+		return ringle.get(3);
 	}
 
-	public void pojacaj(int pozicija) {
+	public void pojacaj(int pozicija, ArrayList<Ringla> ringle) {
 		/*
 		 * metodu pojacaj kojoj se prosledjuje pozicija ringle pozicija 1 je ringla gore
 		 * levo pozicija 2 je ringla gore desno pozicija 3 je ringla dole levo pozicija
@@ -83,61 +83,15 @@ public class ElektricniSporet {
 		 * funkije
 		 * 
 		 */
+		Ringla ringla = ringle.get(pozicija);
 
-		switch (pozicija) {
-		case 1:
-			if (this.ringlaGL.daLiRadiRingla()) {
-				this.ringlaGL.pojacajRinglu();
-			} else if (brojUkljucenihRingli() + 1 > this.maxUkljucenihRingli) {
-				ugasi(2);
-				ugasi(3);
-				ugasi(4);
-				this.ringlaGL.pojacajRinglu();
-			} else {
-				this.ringlaGL.pojacajRinglu();
-			}
-
-			break;
-
-		case 2:
-			if (this.ringlaGD.daLiRadiRingla()) {
-				this.ringlaGD.pojacajRinglu();
-			} else if (brojUkljucenihRingli() + 1 > this.maxUkljucenihRingli) {
-				ugasi(1);
-				ugasi(3);
-				ugasi(4);
-				this.ringlaGD.pojacajRinglu();
-			} else {
-				this.ringlaGD.pojacajRinglu();
-			}
-			break;
-
-		case 3:
-			if (this.ringlaDL.daLiRadiRingla()) {
-				this.ringlaDL.pojacajRinglu();
-			} else if (brojUkljucenihRingli() + 1 > this.maxUkljucenihRingli) {
-				ugasi(1);
-				ugasi(2);
-				ugasi(4);
-				this.ringlaDL.pojacajRinglu();
-			} else {
-				this.ringlaDL.pojacajRinglu();
-			}
-			break;
-
-		case 4:
-			if (this.ringlaDD.daLiRadiRingla()) {
-				this.ringlaDD.pojacajRinglu();
-			} else if (brojUkljucenihRingli() + 1 > this.maxUkljucenihRingli) {
-				ugasi(2);
-				ugasi(3);
-				ugasi(1);
-				this.ringlaDD.pojacajRinglu();
-			} else {
-				this.ringlaDD.pojacajRinglu();
-			}
-			break;
-
+		if (ringla.daLiRadiRingla()) {
+			ringla.pojacajRinglu();
+		} else if (brojUkljucenihRingli(ringle) + 1 > this.maxUkljucenihRingli) {
+			ugasiRingle(ringle, pozicija);
+			ringla.pojacajRinglu();
+		} else {
+			ringla.pojacajRinglu();
 		}
 
 	}
@@ -151,58 +105,36 @@ public class ElektricniSporet {
 		 */
 		// public void ugasiRinglu() {
 		// this.jacinaRingle = 0;
-
-		switch (pozicija) {
-		case 1:
-			this.ringlaGL.ugasiRinglu();
-			break;
-
-		case 2:
-			this.ringlaGD.ugasiRinglu();
-			break;
-
-		case 3:
-			this.ringlaDL.ugasiRinglu();
-			break;
-
-		case 4:
-			this.ringlaDD.ugasiRinglu();
-			break;
-
-		}
+		ringle.get(pozicija - 1).ugasiRinglu();
 
 	}
 
-	public int brojUkljucenihRingli() {
+	public int brojUkljucenihRingli(ArrayList<Ringla> ringle) {
 		int brojac = 0;
 
-		if (this.ringlaGL.daLiRadiRingla()) {
-			brojac++;
-		}
-		if (this.ringlaGD.daLiRadiRingla()) {
-			brojac++;
-		}
-		if (this.ringlaDL.daLiRadiRingla()) {
-			brojac++;
-		}
-		if (this.ringlaDD.daLiRadiRingla()) {
-			brojac++;
-		}
+		for (int i = 0; i < ringle.size(); i++) {
+			Ringla ringla = ringle.get(i);
 
+			if (ringla.daLiRadiRingla()) {
+				brojac++;
+			}			
+		}
 		return brojac;
 	}
 
-	public double potrosnja(double vreme) {
+	public double potrosnja(ArrayList<Ringla> ringle, double vreme) {
 		/*
 		 * metodu koja racuna i vraca ukupnu potrosnju za ceo elektricni sporet, tako
 		 * sto sabira potrosnju za sve ringle (kao parametar se unosi vreme koliko vec
 		 * ringle rade)
-		 */
+		 */		
 		double potrosnja = 0;
-		potrosnja = this.ringlaGL.potrosnjaElektricneEnergije(vreme) + this.ringlaGD.potrosnjaElektricneEnergije(vreme)
-				+ this.ringlaDL.potrosnjaElektricneEnergije(vreme) + this.ringlaDD.potrosnjaElektricneEnergije(vreme);
+		for (int i = 0; i < ringle.size(); i++) {
+			Ringla ringla = this.ringle.get(i);
+			potrosnja = potrosnja + ringla.potrosnjaElektricneEnergije(vreme);	
+		}		
 		return potrosnja;
-	}
+		}
 
 	public void printSporet() {
 		/*
@@ -215,16 +147,24 @@ public class ElektricniSporet {
 		 * ringle Jacina: jacina Grejac: jacina grejaca kW
 		 * 
 		 */
-
+		
 		System.out.println(this.marka + " - " + this.garancija + "\n" + "Ringle: " + "\n" + "Ringla GL:");
-		this.ringlaGL.printRingla();
+		this.ringle.get(0).printRingla();
 		System.out.println("Ringla GD: ");
-		this.ringlaGD.printRingla();
+		this.ringle.get(1).printRingla();
 		System.out.println("Ringla DL: ");
-		this.ringlaDL.printRingla();
+		this.ringle.get(2).printRingla();
 		System.out.println("Ringla DD: ");
-		this.ringlaDD.printRingla();
+		this.ringle.get(3).printRingla();
 		System.out.println();
+	}
+
+	public void ugasiRingle(ArrayList<Ringla> ringle, int ringla) {
+		for (int i = 0; i < ringle.size(); i++) {
+			if (i != ringla) {
+				this.ugasi(i);
+			}
+		}
 	}
 
 }
