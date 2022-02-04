@@ -30,6 +30,8 @@ POMOC: Brisite elemente odozdo.
 		driver.get("https://s.bootsnipp.com/iframe/Dq2X");
 
 		List<WebElement> links = driver.findElements(By.xpath("//*[@class = 'close']"));
+		
+		//bd-footer py-5 mt-5 bg-light
 
 		boolean elementPostoji;
 		for (int i = 0; i < links.size(); i++) {
