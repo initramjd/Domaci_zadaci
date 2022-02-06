@@ -1,9 +1,12 @@
 package d04_02_2022;
 
+import static org.testng.Assert.assertEquals;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -59,6 +62,7 @@ public class Zadatak1 {
 
 	@Test
 	public void KP() throws InterruptedException {
+
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		driver.get("https://www.kupujemprodajem.com/");
 
@@ -68,7 +72,6 @@ public class Zadatak1 {
 		driver.findElement(By.xpath("//*[@id = 'searchKeywordsInput']")).sendKeys(Keys.ENTER);
 
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id = 'priceSecondSelection']"))).click();
-
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@value = 'eur']"))).click();
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id = 'orderSecondSelection']"))).click();
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@data-text = 'Jeftinije']"))).click();
@@ -95,15 +98,8 @@ public class Zadatak1 {
 			listaCenovnik.add(doublePart1);
 		}
 
-		for (int i = 1; i < listaCenovnik.size() - 1; i++) {
-
-			if (listaCenovnik.get(i) >= listaCenovnik.get(i - 1) && listaCenovnik.get(i) <= listaCenovnik.get(i + 1)) {
-
-			} else {
-				System.out.println("GRESKA !!!!");
-			}
-
-		}
+		List<Double> sorted = listaCenovnik.stream().sorted().collect(Collectors.toList());
+		assertEquals(sorted, listaCenovnik, "Lista nije sortirana");
 
 	}
 
